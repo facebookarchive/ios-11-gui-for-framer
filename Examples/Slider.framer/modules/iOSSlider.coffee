@@ -1,1 +1,0 @@
-../../../Components/iOSSlider.coffee
