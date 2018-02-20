@@ -12,9 +12,9 @@ If something is off, we want to fix it. Shoot us a message at designresources@fb
 While Facebook has redrawn and shares these assets for the benefit of the design community, Facebook does not own any of the underlying product or user interface designs. By accessing these assets, you agree to obtain all necessary permissions from the underlying rights holders and/or adhere to any applicable brand use guidelines before using them. Facebook disclaims all express or implied warranties with respect to these assets, including non-infringement of intellectual property rights.
 
 ### Installation
-Download a zip or clone the repository
-Drag any of the coffee component files into your Framer project, or manually copy them into the project's "modules" folder
-Make sure any `require` statements added to your project are using {}s
+Download a zip or clone the repository.  
+Drag any of the coffee component files into your Framer project, or manually copy them into the project's "modules" folder.  
+Add any necessary `require` statements to your project, including braces {}  
 ```
 {iOSStatusBar} = require "iOSStatusBar"
 ```
