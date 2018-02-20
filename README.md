@@ -8,6 +8,8 @@ New to designing apps? You may want to get acquainted with some of the support d
 Check out our page at [facebook.design](http://facebook.design/ios11) for addition iOS templates for Sketch, Photohop, and Origami
 If something is off, we want to fix it. Shoot us a message at designresources@fb.com
 
+### Disclaimer
+While Facebook has redrawn and shares these assets for the benefit of the design community, Facebook does not own any of the underlying product or user interface designs. By accessing these assets, you agree to obtain all necessary permissions from the underlying rights holders and/or adhere to any applicable brand use guidelines before using them. Facebook disclaims all express or implied warranties with respect to these assets, including non-infringement of intellectual property rights.
 
 ### Installation
 Download a zip or clone the repository
@@ -16,7 +18,6 @@ Make sure any `require` statements added to your project are using {}s
 ```
 {iOSStatusBar} = require "iOSStatusBar"
 ```
-
 
 ### Contents
 
