@@ -34,12 +34,12 @@ class exports.iOSToolbar extends Layer
 			translucent: true
 			tintColor: "#027AFF"
 			backgroundColor: ""
-		
+
 		super options
-		
+
 		@items = []
 		@tintColor = options.tintColor
-		
+
 		Framer.Device.on "change:orientation", (angle) =>
 			@height = @_bgHeight()
 			@width = Screen.width
@@ -53,7 +53,7 @@ class exports.iOSToolbar extends Layer
 		if isIPhoneX
 			return if isPortrait then 83 else 53
 		return @_barHeight()
-	
+
 	_barHeight: ->
 		isPortrait = Framer.Device.orientationName is "portrait"
 		isPlusPhone = Framer.Device.deviceType.includes("-plus-")
@@ -63,7 +63,7 @@ class exports.iOSToolbar extends Layer
 		isPortrait = Framer.Device.orientationName is "portrait"
 		isIPhoneX = Framer.Device.deviceType.includes("-iphone-x-")
 		if isIPhoneX and !isPortrait then 64 else 0
-	
+
 	@define "translucent",
 		get: -> @_translucent
 		set: (value) ->
@@ -80,7 +80,7 @@ class exports.iOSToolbar extends Layer
 			else
 				@backgroundBlur = 0
 				@_shadow?.destroy()
-	
+
 	addButton: (layer) ->
 		if layer instanceof SVGLayer
 			layer.stroke = ""
@@ -93,28 +93,28 @@ class exports.iOSToolbar extends Layer
 				webkitMaskPosition: "center center"
 				webkitMaskImage: "url(#{layer.image})"
 			layer.image = null
-		
+
 		button = @_addLayer layer
 		button.name = "Button: "+layer.name
 		return button
-		
+
 	addTextButton: (text) ->
 		label = new TextLayer
 			parent: @
 			name: ".label"
 			text: text
 			color: @tintColor
-            fontSize: 17
-            fontWeight: 400
+			fontSize: 17
+			fontWeight: 400
 			backgroundColor: ""
-		
+
 		button = @_addLayer label
 		button.name = "Button: "+text
 		return button
 
 	_addLayer: (layer) ->
 		margins = if layer instanceof TextLayer then 16 else 11
-		
+
 		button = new Layer
 			parent: @
 			height: @_barHeight()
@@ -128,26 +128,26 @@ class exports.iOSToolbar extends Layer
 			parent: button
 			x: Align.center
 			y: Align.center
-		
+
 		if _.indexOf(@items, button) is -1
 			@items.push(button)
-		
+
 		@_layoutItems()
-		
+
 		button.onTouchStart (event, layer) ->
 			@opacity = 0.2
-			
+
 			# If you touch down on the button and then move off the layer, you don't get the touchEnd so we have to register separately for it
 			@parent._trackingButton = @
 			Events.wrap(document).addEventListener("tapend", @_touchEnd)
-		
+
 		button._touchEnd = (event, layer) =>
 			button = @._trackingButton
 			button.opacity = 1
 			Events.wrap(document).removeEventListener(Gestures.TapEnd, button._touchEnd)
-		
+
 		return button
-		
+
 	_layoutItems: ->
 		firstItem = _.first @items
 		lastItem = _.last @items
@@ -159,20 +159,20 @@ class exports.iOSToolbar extends Layer
 
 		firstItem?.x = Align.left leftMargin
 		lastItem?.x = Align.right rightMargin
-		
+
 		minX = leftMargin
 		minX = firstItem.midX if firstItem?
 		maxX = @width - leftMargin + rightMargin
 		maxX = lastItem.midX if lastItem?
-		
+
 		middleItems = @items[1...-1]
 		for item,index in middleItems
 			item.midX = Utils.modulate(index+1, [0,@items.length-1], [minX, maxX])
-		
+
 		# Account for height change on rotation
 		for item in @items
 			item.height = @_barHeight()
 			item.y = if @maxY is Screen.height then Align.top else Align.center
-			
+
 			for sublayers in item.children
 				sublayers.y = Align.center
