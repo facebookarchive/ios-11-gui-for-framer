@@ -1,12 +1,14 @@
 # Facebook iOS 11 iPhone GUI for Framer
 ### Design better, faster
 
-Quickly make prototypes with native-feeling iOS 11 interactions. We’ve created customizable Framer components that mirror the behavior of the most important UI elements including navigation bar, notifications, action sheets, alerts, video player, sliders, switches, and more. Whether using these components to mock up apps, concept ideas, or create custom interface elements that work harmoniously with those native to iOS, we hope they help you work faster and elevate your designs.
+Quickly make prototypes with native-feeling iOS 11 interactions. A part of [Facebook's iOS GUI](https://facebook.design/ios11), we’ve created customizable Framer components that mirror the behavior of the most important UI elements including navigation bar, notifications, action sheets, alerts, video player, sliders, switches, and more. Whether using these components to mock up apps, concept ideas, or create custom interface elements that work harmoniously with those native to iOS, we hope they help you work faster and elevate your designs.
 
 New to designing apps? You may want to get acquainted with some of the support documentation that Apple has put together in their [Human Interface Guidelines](https://developer.apple.com/ios/human-interface-guidelines/overview/themes/) and their [Apple UI Design Resources](https://developer.apple.com/design/resources/).
 
-Check out our page at [facebook.design](http://facebook.design/ios11) for addition iOS templates for Sketch, Photohop, and Origami
+Check out our page at [facebook.design](http://facebook.design/ios11) for addition iOS templates for Sketch, Photoshop, and Origami
 If something is off, we want to fix it. Shoot us a message at designresources@fb.com
+
+[Check out the example file](https://framer.cloud/gRJuo) (open in Safari) on Framer Cloud for usage examples.
 
 ### Disclaimer
 While Facebook has redrawn and shares these assets for the benefit of the design community, Facebook does not own any of the underlying product or user interface designs. By accessing these assets, you agree to obtain all necessary permissions from the underlying rights holders and/or adhere to any applicable brand use guidelines before using them. Facebook disclaims all express or implied warranties with respect to these assets, including non-infringement of intellectual property rights.
@@ -104,7 +106,7 @@ actionSheet.addAction "Mark as Unread", ->
 
 Shows the ActionSheet. It's animated by default and will come up from the bottom. The event `"actionSheetAppear"` is emitted upon animation completion.
 
-### Properties
+### Arguments
 
 `animated` – bool to control whether the ActionSheet is animated in or appears instantly  
 
@@ -126,7 +128,7 @@ actionSheet.present()
 
 Hides the ActionSheet. It's animated by default. The event `"actionSheetDismiss"` is emitted upon animation completion.
 
-### Properties
+### Arguments
 
 `animated` – bool to control whether the ActionSheet is animated out or appears instantly. (Optional)  
 
@@ -146,9 +148,7 @@ Utils.delay 5, ->
     actionSheet.dismiss()
 ```
 
-### 
-
-Events
+## Events
 The following events are emitted and available from ActionSheet.
 
 `"actionSelected"` – emitted when a given action is selected. Has the title of the selected action available as an argument.  
@@ -229,21 +229,101 @@ indicator.stopAnimating()
 
 
 # AlertView
+This component is used to display an alert message to the user and prompt a response. It will adapt its layout to the number of actions just like UIKit.
+
+## Properties
+
+`title` – a string, the title of the alert  
+`message` – a string, the message of the alert  
+`tintColor` – the color to be used for the action labels  
 
 ```
 alert = new AlertView
-    # OPTIONAL
-    title: <string> (title of the alert)
-    message: <string> (message of the alert)
-    tintColor: <color> (text color of the actions)
+    title: "Here is an alert"
+    message: "Here is a message"
 
-alert.addAction <string> (title of the action), <string> (style for action, either "default", "cancel", or "destructive"), <function> (callback called when action selected)
 
-alert.present <bool> (shows the alert)
-alert.dismiss <bool> (dismisses the alert)`
+alert.addAction "Done", ->
+    print "Alert dismissed"
+
+alert.present()
+```
+## alert.addAction(title, style, callback)
+Add an action to the AlertView. Style is optional and will rearrange the actions' order based on iOS convention around the "cancel" action being the lowest most action. Layout adapts to the number of actions.
+
+### Arguments
+`title` – a string, the title of the label for the action (required)
+`style` –  a string, either "default", "cancel" (bold text), or "destructive" (red text.)
+`callback` – function to be called when the action is selected
+
+```
+alertView = new AlertView
+    title: "Delete All?"
+
+alertView.addAction "Yes"
+alertView.addAction "Cancel"
+```
+Change the style of the action to `"destructive"`` to make the text red or ``"cancel"`` to bold.
+
+```
+alertView = new AlertView
+    title: "Delete All?"
+
+alertView.addAction "Delete", "destructive"
+alertView.addAction "Cancel", "cancel"
+```
+Add a callback to execute some code when a given action is selected
+```
+alertView = new AlertView
+    title: "Delete All?"
+
+alertView.addAction "Delete", ->
+    print "All messages deleted"
 ```
 
+## alert.present(animated)
+Shows the ActionSheet. It's animated by default.
+### Arguments
+`animated` - bool to control whether the AlertView is animated in or appears instantly
+```
+alert = new AlertView
+    title: "Here is an alert"
+    message: "Here is a message"
 
+
+alert.addAction "Done"
+
+# Animate the AlertView in when the prototype runs
+alert.present()
+```
+
+### alert.dismiss(animated)
+Hides the AlertView. It's animated by default.
+### Arguments
+`animated` - bool to control whether the AlertView is animated out or disappears instantly
+
+```
+alert = new AlertView
+    title: "Here is an alert"
+    message: "Here is a message"
+
+
+alert.addAction "Done"
+
+# Show the AlertView instantly
+alert.present(false)
+
+# Animate the AlertView out after a delay
+Utils.delay 5, ->
+    alert.dismiss()
+```
+
+## Events
+The following events are emitted and available from AlertView.
+
+`"actionSelected"` – emitted when a given action is selected. Has the title of the selected action available as an argument.  
+`"alertViewAppear"` – emitted on entrance animation complete  
+`"alertViewDismiss"` – emitted on exit animation complete  
 
 # NavigationBar
 
@@ -397,7 +477,7 @@ The standard the iOS page dots that can be manually setup and controlled. For st
 
 **Note**: if both pageIndicatorTintColor and currentPageIndicatorTintColor are both "white" or "black", the inactive dots will be displayed with a transparent version of the color
 
-Create a custom page control with 5 dots using white and red colors 
+Create a custom page control with 5 dots using white and red colors
 
 ```
 {iOSPageComponent, iOSPageControl} = require "iOSPageComponent"
@@ -425,7 +505,7 @@ Create a control with default styling and three segments, and select the first s
 ```
 segmentedControl = new iOSSegmentedControl
     items: ["First thing", "Second thing", "Third thing"]
-    
+
 segmentedControl.setSelected true, 0
 ```
 
@@ -447,14 +527,14 @@ momentarySwitch = new iOSSegmentedControl
 ```
 segmentedControl = new iOSSegmentedControl
     items: ["First thing", "Second thing", "Third thing"]
-    
+
 segmentedControl.setSelected true, 0
 
 print segmentedControl.numberOfSegments # 3
 print segmentedControl.selectedSegmentIndex # 0
 ```
 
-### 
+###
 
 ## segmentedControl.setSelected(enabled, index)
 
@@ -710,7 +790,7 @@ Create a tab bar with 3 tabs
 ```
 tabBar = new iOSTabBar
 
-tabBar.addTab Tab_1, 
+tabBar.addTab Tab_1,
     title: "First"
     icon: Image_1
 

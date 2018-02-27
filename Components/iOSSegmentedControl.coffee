@@ -64,7 +64,7 @@ class exports.iOSSegmentedControl extends Layer
             @_addSegment item
         @_layoutSegments()
         @_touchDown = false
-        
+
     _segmentForEvent: (event) ->
         # TouchMove doesn't work the same on mobile, so do the hit testing ourselves
         touchEvent = Events.touchEvent(event)
@@ -90,7 +90,7 @@ class exports.iOSSegmentedControl extends Layer
         segment.onTouchMove (event, layer) =>
             layer = @_segmentForEvent event
             return if layer is undefined
-            
+
             @_unselectAll()
             return if layer is @_selectedItem
             if @_touchDown then layer.backgroundColor = new Color(@_tintColor).alpha(.1)
@@ -98,7 +98,7 @@ class exports.iOSSegmentedControl extends Layer
         segment.onTouchEnd (event, layer) =>
             layer = @_segmentForEvent event
             return if layer is undefined
-            
+
             @_selectItem layer
 
         titleText = new TextLayer
@@ -160,17 +160,17 @@ class exports.iOSSegmentedControl extends Layer
             @_highlightItem @_selectedItem
         else
             @_unselectItem item
-        @emit("change:currentSegment", item?.index, oldItem?.index)
+        @emit("change:currentSegment", item, oldItem)
 
     _unselectAll: ()->
         for segment in @_segments
             @_removeHighlight segment unless segment is @_selectedItem
-            
+
     _unselectItem: (item, isClearing)->
         if item? then @_removeHighlight item
         if isClearing
             @_selectedItem = null
-            @emit("change:currentSegment", null, item?.index)
+            @emit("change:currentSegment", null, item)
 
     _highlightItem: (item)->
         item.backgroundColor = @_tintColor
@@ -243,5 +243,3 @@ class exports.iOSSegmentedControl extends Layer
     autoWidthLayout: ()->
         @width = Screen.width - @HPADDING*2
         @_layoutSegments()
-
-
