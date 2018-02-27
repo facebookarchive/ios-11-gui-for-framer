@@ -8,6 +8,8 @@ New to designing apps? You may want to get acquainted with some of the support d
 Check out our page at [facebook.design](http://facebook.design/ios11) for addition iOS templates for Sketch, Photohop, and Origami
 If something is off, we want to fix it. Shoot us a message at designresources@fb.com
 
+You can also [check out the example file](https://framer.cloud/gRJuo) on Framer Cloud
+
 ### Disclaimer
 While Facebook has redrawn and shares these assets for the benefit of the design community, Facebook does not own any of the underlying product or user interface designs. By accessing these assets, you agree to obtain all necessary permissions from the underlying rights holders and/or adhere to any applicable brand use guidelines before using them. Facebook disclaims all express or implied warranties with respect to these assets, including non-infringement of intellectual property rights.
 
@@ -146,7 +148,7 @@ Utils.delay 5, ->
     actionSheet.dismiss()
 ```
 
-### 
+###
 
 Events
 The following events are emitted and available from ActionSheet.
@@ -397,7 +399,7 @@ The standard the iOS page dots that can be manually setup and controlled. For st
 
 **Note**: if both pageIndicatorTintColor and currentPageIndicatorTintColor are both "white" or "black", the inactive dots will be displayed with a transparent version of the color
 
-Create a custom page control with 5 dots using white and red colors 
+Create a custom page control with 5 dots using white and red colors
 
 ```
 {iOSPageComponent, iOSPageControl} = require "iOSPageComponent"
@@ -425,7 +427,7 @@ Create a control with default styling and three segments, and select the first s
 ```
 segmentedControl = new iOSSegmentedControl
     items: ["First thing", "Second thing", "Third thing"]
-    
+
 segmentedControl.setSelected true, 0
 ```
 
@@ -447,14 +449,14 @@ momentarySwitch = new iOSSegmentedControl
 ```
 segmentedControl = new iOSSegmentedControl
     items: ["First thing", "Second thing", "Third thing"]
-    
+
 segmentedControl.setSelected true, 0
 
 print segmentedControl.numberOfSegments # 3
 print segmentedControl.selectedSegmentIndex # 0
 ```
 
-### 
+###
 
 ## segmentedControl.setSelected(enabled, index)
 
@@ -710,7 +712,7 @@ Create a tab bar with 3 tabs
 ```
 tabBar = new iOSTabBar
 
-tabBar.addTab Tab_1, 
+tabBar.addTab Tab_1,
     title: "First"
     icon: Image_1
 
