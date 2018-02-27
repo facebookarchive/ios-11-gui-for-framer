@@ -157,6 +157,7 @@ class exports.iOSNotification extends Layer
 			z: 1
 		super options
 
+		@backgroundColor = new Color("rgba(255,255,255,0.95)") if Utils.isChrome()
 
 
 		@_initialY = null
