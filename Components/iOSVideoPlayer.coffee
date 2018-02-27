@@ -823,6 +823,7 @@ class exports.iOSVideoPlayer extends VideoLayer
 			@animate
 				midX: point.x
 				midY: point.y
+				scale: 1
 				options: animOptions
 					
 			if event.offset.y > 100
