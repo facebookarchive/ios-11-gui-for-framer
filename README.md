@@ -1,14 +1,14 @@
 # Facebook iOS 11 iPhone GUI for Framer
 ### Design better, faster
 
-Quickly make prototypes with native-feeling iOS 11 interactions. We’ve created customizable Framer components that mirror the behavior of the most important UI elements including navigation bar, notifications, action sheets, alerts, video player, sliders, switches, and more. Whether using these components to mock up apps, concept ideas, or create custom interface elements that work harmoniously with those native to iOS, we hope they help you work faster and elevate your designs.
+Quickly make prototypes with native-feeling iOS 11 interactions. A part of [Facebook's iOS GUI](https://facebook.design/ios11), we’ve created customizable Framer components that mirror the behavior of the most important UI elements including navigation bar, notifications, action sheets, alerts, video player, sliders, switches, and more. Whether using these components to mock up apps, concept ideas, or create custom interface elements that work harmoniously with those native to iOS, we hope they help you work faster and elevate your designs.
 
 New to designing apps? You may want to get acquainted with some of the support documentation that Apple has put together in their [Human Interface Guidelines](https://developer.apple.com/ios/human-interface-guidelines/overview/themes/) and their [Apple UI Design Resources](https://developer.apple.com/design/resources/).
 
 Check out our page at [facebook.design](http://facebook.design/ios11) for addition iOS templates for Sketch, Photoshop, and Origami
 If something is off, we want to fix it. Shoot us a message at designresources@fb.com
 
-You can also [check out the example file](https://framer.cloud/gRJuo) on Framer Cloud.
+[Check out the example file](https://framer.cloud/gRJuo) on Framer Cloud for usage examples.
 
 ### Disclaimer
 While Facebook has redrawn and shares these assets for the benefit of the design community, Facebook does not own any of the underlying product or user interface designs. By accessing these assets, you agree to obtain all necessary permissions from the underlying rights holders and/or adhere to any applicable brand use guidelines before using them. Facebook disclaims all express or implied warranties with respect to these assets, including non-infringement of intellectual property rights.
