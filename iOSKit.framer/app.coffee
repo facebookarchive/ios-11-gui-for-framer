@@ -101,7 +101,7 @@ showPages = ->
 	
 	pages.snapToPage(pages.content.children[0])
 	navBar.pushNavigationItem pages,
-		title: "Page Component"
+		title: "Pages"
 		
 
 showVideo = ->
