@@ -106,7 +106,7 @@ actionSheet.addAction "Mark as Unread", ->
 
 Shows the ActionSheet. It's animated by default and will come up from the bottom. The event `"actionSheetAppear"` is emitted upon animation completion.
 
-### Properties
+### Arguments
 
 `animated` – bool to control whether the ActionSheet is animated in or appears instantly  
 
@@ -128,7 +128,7 @@ actionSheet.present()
 
 Hides the ActionSheet. It's animated by default. The event `"actionSheetDismiss"` is emitted upon animation completion.
 
-### Properties
+### Arguments
 
 `animated` – bool to control whether the ActionSheet is animated out or appears instantly. (Optional)  
 
@@ -148,9 +148,7 @@ Utils.delay 5, ->
     actionSheet.dismiss()
 ```
 
-###
-
-Events
+## Events
 The following events are emitted and available from ActionSheet.
 
 `"actionSelected"` – emitted when a given action is selected. Has the title of the selected action available as an argument.  
@@ -231,21 +229,101 @@ indicator.stopAnimating()
 
 
 # AlertView
+This component is used to display an alert message to the user and prompt a response. It will adapt its layout to the number of actions just like UIKit.
+
+## Properties
+
+`title` – a string, the title of the alert  
+`message` – a string, the message of the alert  
+`tintColor` – the color to be used for the action labels  
 
 ```
 alert = new AlertView
-    # OPTIONAL
-    title: <string> (title of the alert)
-    message: <string> (message of the alert)
-    tintColor: <color> (text color of the actions)
+    title: "Here is an alert"
+    message: "Here is a message"
 
-alert.addAction <string> (title of the action), <string> (style for action, either "default", "cancel", or "destructive"), <function> (callback called when action selected)
 
-alert.present <bool> (shows the alert)
-alert.dismiss <bool> (dismisses the alert)`
+alert.addAction "Done", ->
+    print "Alert dismissed"
+
+alert.present()
+```
+## alert.addAction(title, style, callback)
+Add an action to the AlertView. Style is optional and will rearrange the actions' order based on iOS convention around the "cancel" action being the lowest most action. Layout adapts to the number of actions.
+
+### Arguments
+`title` – a string, the title of the label for the action (required)
+`style` –  a string, either "default", "cancel" (bold text), or "destructive" (red text.)
+`callback` – function to be called when the action is selected
+
+```
+alertView = new AlertView
+    title: "Delete All?"
+
+alertView.addAction "Yes"
+alertView.addAction "Cancel"
+```
+Change the style of the action to `"destructive"`` to make the text red or ``"cancel"`` to bold.
+
+```
+alertView = new AlertView
+    title: "Delete All?"
+
+alertView.addAction "Delete", "destructive"
+alertView.addAction "Cancel", "cancel"
+```
+Add a callback to execute some code when a given action is selected
+```
+alertView = new AlertView
+    title: "Delete All?"
+
+alertView.addAction "Delete", ->
+    print "All messages deleted"
 ```
 
+## alert.present(animated)
+Shows the ActionSheet. It's animated by default.
+### Arguments
+`animated` - bool to control whether the AlertView is animated in or appears instantly
+```
+alert = new AlertView
+    title: "Here is an alert"
+    message: "Here is a message"
 
+
+alert.addAction "Done"
+
+# Animate the AlertView in when the prototype runs
+alert.present()
+```
+
+### alert.dismiss(animated)
+Hides the AlertView. It's animated by default.
+### Arguments
+`animated` - bool to control whether the AlertView is animated out or disappears instantly
+
+```
+alert = new AlertView
+    title: "Here is an alert"
+    message: "Here is a message"
+
+
+alert.addAction "Done"
+
+# Show the AlertView instantly
+alert.present(false)
+
+# Animate the AlertView out after a delay
+Utils.delay 5, ->
+    alert.dismiss()
+```
+
+## Events
+The following events are emitted and available from AlertView.
+
+`"actionSelected"` – emitted when a given action is selected. Has the title of the selected action available as an argument.  
+`"alertViewAppear"` – emitted on entrance animation complete  
+`"alertViewDismiss"` – emitted on exit animation complete  
 
 # NavigationBar
 
