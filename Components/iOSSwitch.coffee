@@ -58,7 +58,7 @@ class Switch extends Layer
 
 		@base.animationOptions =
 			time: 0.6
-			curve: Spring(damping: 0.7)
+			curve: Spring(damping: 0.75)
 
 		@thumb = new Layer
 			name: ".thumb"
@@ -74,7 +74,7 @@ class Switch extends Layer
 			x: 21
 		@thumb.animationOptions =
 			time: 0.6
-			curve: Spring(damping: 0.7)
+			curve: Spring(damping: 0.8)
 
 		@thumbFill = new Layer
 			name: "thumbFill"
